@@ -68,21 +68,19 @@ router.put("/:id", async (req, res) => {
 //DELETE
 router.delete("/:id", async (res, req) => {
   const id = req.params.id;
-  try {
-    const toDelete = await Projects.get(id);
-    if (!toDelete) {
-      res.status(404).json({ message: "Post does not exist." });
-    } else {
-      const deleted = await Projects.remove(id);
-      if (deleted) {
-        res.status(200).json({ message: "Successfully Deleted." });
+  Projects.remove(id)
+    .then(project => {
+      if (id) {
+        res.status(200).json(project);
+      } else {
+        res
+          .status(404)
+          .json({ message: "The project with this id does not exist" });
       }
-    }
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "An error occured while deleting project." });
-  }
+    })
+    .catch(err => {
+      res.status(505).json({ message: "error deleting project" });
+    });
 });
 
 //GET PROJECT ACTIONS

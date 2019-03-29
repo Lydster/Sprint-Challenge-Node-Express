@@ -33,8 +33,8 @@ router.get("/:id", async (req, res) => {
 //ADD
 
 router.post("/", async (req, res) => {
-  const newAction = req.body;
   const { project_id, description, notes } = req.body;
+  console.log(req.body);
   try {
     if (!project_id || !description || !notes) {
       req.status(400).json({
@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
           "Please Provide a  project id, description, and notes for the action"
       });
     } else {
-      newAction = await Actions.insert(req.body);
+      const newAction = await Actions.insert(req.body);
       res.status(201).json(newAction);
     }
   } catch (error) {
