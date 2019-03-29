@@ -16,24 +16,37 @@ router.get("/", async (req, res) => {
   }
 });
 
+//GET ONE
+
+router.get("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const action = await Actions.get(id);
+    res.status(200).json(action);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occured while trying to retrieve that action" });
+  }
+});
+
 //ADD
 
 router.post("/", async (req, res) => {
   const newAction = req.body;
   const { project_id, description, notes } = req.body;
-  if (!project_id || !description || !notes) {
-    req.status(400).json({
-      message:
-        "Please provide project id, description, and notes for the action."
-    });
-  }
   try {
-    newAction = await Actions.insert(req.body);
-    res.status(201).json({ message: "Successfully added." });
+    if (!project_id || !description || !notes) {
+      req.status(400).json({
+        message:
+          "Please Provide a  project id, description, and notes for the action"
+      });
+    } else {
+      newAction = await Actions.insert(req.body);
+      res.status(201).json(newAction);
+    }
   } catch (error) {
-    res
-      .status(500)
-      .json({ errorMessage: "Could not add action to the server. " });
+    res.status(500).json({ errorMessage: "A server error occured." });
   }
 });
 
@@ -54,6 +67,28 @@ router.put("/:id", async (req, res) => {
     res
       .status(500)
       .json({ message: "There was an error while updating the action." });
+  }
+});
+
+//DELETE
+
+router.delete("/", async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  try {
+    const toDelete = await Actions.get(id);
+    if (!toDelete) {
+      res
+        .status(404)
+        .json({ message: "the action you want to delete does not exist." });
+    } else {
+      const removed = await Actions.remove(id);
+      res.status(200).json({ message: "Successfully Deleted." });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: " There was an error while deleting this post." });
   }
 });
 
