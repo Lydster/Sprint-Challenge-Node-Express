@@ -16,4 +16,19 @@ router.get("/", async (req, res) => {
   }
 });
 
+//ADD
+
+router.post("/", async (req, res) => {
+  const { name, description } = req.body;
+  if (!name || !description) {
+    req.status(400).json({ message: "Please Provide a name and description." });
+  }
+  try {
+    newProject = await Projects.insert(req.body);
+    res.status(201).json({ message: "Successfully Added!" });
+  } catch (error) {
+    res.status(500).json({ errorMessage: "A server error occured." });
+  }
+});
+
 module.exports = router;
