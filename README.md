@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+We learned about express middleware and endpoints in express.
+
 - [ ] Describe Middleware?
+
+Middleware is a usually a function that performs some operation on your data between the front end and backend. 
 
 - [ ] Describe a Resource?
 
+A resource is data. 
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+Very specific messages thatt correlate exactly with what is happening on the backend or the client side.
+
 - [ ] How can we partition our application into sub-applications?
+
+By making file structures that are specific to one feature or part of an application. It's a great way to stay organized if you don't need to pass data between the different sections.
 
 ## Project Setup
 
@@ -68,13 +78,13 @@ The `projectModel.js` helper includes an extra method called `getProjectActions(
 
 ## Minimum Viable Product
 
-- [ ] Configure an _npm script_ named _"server"_ that will execute your code using _nodemon_. Make _nodemon_ be a development time dependency only, it shouldn't be deployed to production.
-- [ ] Configure an _npm script_ named _"start"_ that will execute your code using _node_.
+- [X] Configure an _npm script_ named _"server"_ that will execute your code using _nodemon_. Make _nodemon_ be a development time dependency only, it shouldn't be deployed to production.
+- [X] Configure an _npm script_ named _"start"_ that will execute your code using _node_.
 
 Design and build the necessary endpoints to:
 
-- [ ] Perform CRUD operations on _projects_ and _actions_. When adding an action, make sure the `project_id` provided belongs to an existing `project`. If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
-- [ ] Retrieve the list of actions for a project.
+- [X] Perform CRUD operations on _projects_ and _actions_. When adding an action, make sure the `project_id` provided belongs to an existing `project`. If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
+- [X] Retrieve the list of actions for a project.
 
 ### Database Schemas
 
